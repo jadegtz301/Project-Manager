@@ -6,6 +6,7 @@ const projectsList = document.getElementById('projects-list');
 async function loadProjects() {
   try {
     const res = await fetch('/projects');
+    if (!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
     const projects = await res.json();
 
     // Vider la liste avant de la remplir
@@ -27,8 +28,14 @@ async function loadProjects() {
     document.querySelectorAll('.delete-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const id = btn.dataset.id;
-        await fetch(`/projects/${id}`, { method: 'DELETE' });
-        loadProjects();
+        try {
+          const delRes = await fetch(`/projects/${id}`, { method: 'DELETE' });
+          if (!delRes.ok) throw new Error(`HTTP ${delRes.status} - ${delRes.statusText}`);
+          loadProjects();
+        } catch (err) {
+          console.error('Erreur suppression projet:', err);
+          projectsList.innerHTML = `<div class="error">Erreur suppression projet: ${err.message}</div>`;
+        }
       });
     });
 
@@ -56,6 +63,7 @@ projectForm.addEventListener('submit', async (e) => {
     loadProjects();
   } catch (err) {
     console.error('Erreur ajout projet:', err);
+    projectsList.innerHTML = `<div class="error">Erreur ajout projet: ${err.message}</div>`;
   }
 });
 

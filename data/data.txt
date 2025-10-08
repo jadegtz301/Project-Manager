@@ -1,9 +1,1 @@
-[
-  {
-    "id": 1,
-    "title": "Nouveau projet cool",
-    "description": "Créer une app pour apprendre Express",
-    "status": "en cours",
-    "createdAt": "2025-10-07T19:45:34.517Z"
-  }
-]
+[]

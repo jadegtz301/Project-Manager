@@ -11,6 +11,23 @@ const PORT = 3000;
 // Middleware pour parser le JSON
 app.use(express.json());
 
+// Simple CORS middleware pour autoriser le frontend (utile si le frontend est ouvert
+// depuis un autre origin ou si vous chargez `index.html` en file://)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  next();
+});
+
+// Répondre aux pré-requêtes CORS (générique pour éviter les erreurs path-to-regexp)
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 // Chemin vers le fichier de données
 const dataPath = path.join(__dirname, "data", "data.txt");
 
@@ -18,7 +35,8 @@ const dataPath = path.join(__dirname, "data", "data.txt");
 // 🟢 ROUTE TEST
 // ===============================
 app.get("/", (req, res) => {
-  res.send("Serveur en ligne 🚀");
+  // Servir la page index.html du dossier public
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // ===============================
@@ -125,9 +143,9 @@ app.delete("/projects/:id", (req, res) => {
 });
 
 // ===============================
-// 🚀 SERVIR LE FRONTEND (plus tard)
+// 🚀 SERVIR LE FRONTEND (public)
 // ===============================
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ===============================
 // 🚀 LANCEMENT DU SERVEUR
