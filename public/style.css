@@ -1,49 +1,100 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #f0f0f0;
-  color: #333;
+:root{
+  --bg: #f6f8fa;
+  --bg2: #e9eef8;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --danger: #ef4444;
 }
 
-h1 {
-  text-align: center;
+/* Dark theme overrides */
+/* Dark theme overrides */
+body.dark{
+  --bg: #06080d; /* very dark page background */
+  --bg2: #06080d; /* avoid light band */
+  --card: #0b1220; /* card background */
+  --text: #e6eef8; /* main text */
+  --muted: #9aa6bd; /* muted text */
+  --primary: #3b82f6; /* primary button */
+  --danger: #f87171; /* danger */
+  --border: rgba(255,255,255,0.06);
+  --shadow: rgba(2,6,23,0.6);
 }
 
-form {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
+body{
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  margin: 0;
+  padding: 24px;
+  background: linear-gradient(180deg,var(--bg), var(--bg2) 200px);
+  color: var(--text);
 }
 
-input, select, button {
-  padding: 5px;
-  font-size: 14px;
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  max-width:900px;
+  margin:0 auto 18px;
 }
 
-#projects-list {
-  max-width: 600px;
-  margin: 0 auto;
+.topbar h1{ margin:0; font-size:20px }
+
+.controls{ display:flex; gap:8px }
+
+.card{
+  background:var(--card);
+  border-radius:10px;
+  box-shadow:0 6px 18px var(--shadow);
+  padding:12px;
+  max-width:900px;
+  margin:0 auto 18px;
+  display:flex;
+  gap:8px;
+  align-items:center;
 }
 
-.project {
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+input, select, button{
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid var(--border, #e6edf3);
+  font-size:14px;
+  background: transparent;
+  color: var(--text);
 }
 
-button.delete-btn {
-  background: #e74c3c;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+input:focus, select:focus{ outline:2px solid rgba(37,99,235,0.12) }
+
+.primary{ background:var(--primary); color: white; border:none }
+
+#projects-list{ max-width:900px; margin:0 auto }
+
+.project{
+  background:var(--card);
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 6px 14px var(--shadow);
+  border: 1px solid var(--border, rgba(0,0,0,0.06));
 }
 
-button.delete-btn:hover {
-  background: #c0392b;
-}
+.project .meta{ display:flex; gap:12px; align-items:center }
+.project .title{ font-weight:600 }
+.project .desc{ color:var(--muted); font-size:13px }
+
+.badges{ display:flex; gap:8px; align-items:center }
+.badge{ padding:6px 8px; border-radius:999px; font-size:12px }
+.badge.status-en-cours{ background:#fde68a; color:#92400e }
+.badge.status-termine{ background:#bbf7d0; color:#064e3b }
+.badge.status-a-prevoir{ background:#dbeafe; color:#1e3a8a }
+
+.actions{ display:flex; gap:8px; align-items:center }
+.actions button{ border:none; padding:8px 10px; border-radius:8px; cursor:pointer }
+.actions .delete{ background:var(--danger); color:white }
+.actions .status{ background:rgba(226,232,240,0.08); color:var(--text) }
+
+.error{ color:var(--danger); padding:8px }

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1759949611201,
+    "username": "jadegtz",
+    "salt": "d771fc446c4bb5e05da208feac49fd5a",
+    "hash": "8a9ec5833edbf3bbd0646549b1e746bdd21c9ca2a4ad1065eb5d0ef40d07a65ade40049d2397ea4f3a405a592969dd5751835136fa9e280402b0e6a18648933c",
+    "prefs": {
+      "theme": "dark"
+    }
+  },
+  {
+    "id": 1759949890237,
+    "username": "huh",
+    "salt": "940609af49b060cb5cb1cb5e4a2781fd",
+    "hash": "e6547114cfd6aa0740e9d056c4c4c76e9b20fbd5f2c3212b909f619aafc0d8a818a6ebc6082fa26cf6e0f7ea098ef98c44861f07ef45901df68e7d0fc84d07bf",
+    "prefs": {}
+  }
+]

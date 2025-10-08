@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil - Project Manager</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+</head>
+<body>
+  <main class="card" style="max-width:600px;margin:40px auto;flex-direction:column;gap:12px;">
+    <h2>Mon profil</h2>
+    <div id="user-info"></div>
+
+    <section class="card" style="flex-direction:column;gap:8px;">
+      <h3>Changer le mot de passe</h3>
+      <form id="change-password-form">
+        <input id="currentPassword" type="password" placeholder="Mot de passe actuel" required>
+        <input id="newPassword" type="password" placeholder="Nouveau mot de passe" required>
+        <div style="display:flex;gap:8px;"><button class="primary" type="submit">Changer</button><span id="pw-msg"></span></div>
+      </form>
+    </section>
+
+    <section class="card" style="flex-direction:column;gap:8px;">
+      <h3>Préférences</h3>
+      <label>Thème : <select id="pref-theme"><option value="light">Clair</option><option value="dark">Sombre</option></select></label>
+      <div style="display:flex;gap:8px;"><button id="save-prefs" class="primary">Sauvegarder</button><span id="prefs-msg"></span></div>
+    </section>
+
+    <a href="/">Retour</a>
+  </main>
+
+  <script>
+    async function load(){
+      try{
+        const res = await fetch('/me');
+        if(!res.ok) { location.href = '/login.html'; return }
+        const j = await res.json();
+        document.getElementById('user-info').textContent = `Connecté en tant que ${j.username}`;
+        document.getElementById('pref-theme').value = (j.prefs && j.prefs.theme) || localStorage.getItem('theme') || 'light';
+      }catch(err){ location.href = '/login.html' }
+    }
+    load();
+
+    document.getElementById('change-password-form').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      try{
+        const res = await fetch('/me/change-password', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ currentPassword, newPassword }) });
+        const j = await res.json();
+        if(!res.ok) throw new Error(j.error || 'Erreur');
+        document.getElementById('pw-msg').textContent = 'Mot de passe changé.';
+      }catch(err){ document.getElementById('pw-msg').textContent = err.message }
+    });
+
+    document.getElementById('save-prefs').addEventListener('click', async ()=>{
+      const theme = document.getElementById('pref-theme').value;
+      try{
+        const res = await fetch('/me/prefs', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ prefs: { theme } }) });
+        const j = await res.json();
+        if(!res.ok) throw new Error(j.error || 'Erreur');
+        // also update local
+        localStorage.setItem('theme', theme);
+        document.getElementById('prefs-msg').textContent = 'Préférences sauvegardées.';
+      }catch(err){ document.getElementById('prefs-msg').textContent = err.message }
+    });
+  </script>
+</body>
+</html>
