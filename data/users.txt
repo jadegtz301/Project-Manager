@@ -1,18 +1,19 @@
 [
   {
-    "id": 1759949611201,
+    "id": 1759998071702,
     "username": "jadegtz",
-    "salt": "d771fc446c4bb5e05da208feac49fd5a",
-    "hash": "8a9ec5833edbf3bbd0646549b1e746bdd21c9ca2a4ad1065eb5d0ef40d07a65ade40049d2397ea4f3a405a592969dd5751835136fa9e280402b0e6a18648933c",
+    "salt": "22216c621fe07517c7f16ae189e2e998",
+    "hash": "1ee4e9ba2fb0eeffa63fd47105e54e505057199ad403d43b2f43f2bba1961917436c344beb2edb718ffeacad91352e5d2baf605492044e3fe2a89d1f0723eacf",
     "prefs": {
       "theme": "dark"
-    }
+    },
+    "token": "770531729a672166ee9412b621e0cc9b46ac9d3250788609"
   },
   {
-    "id": 1759949890237,
-    "username": "huh",
-    "salt": "940609af49b060cb5cb1cb5e4a2781fd",
-    "hash": "e6547114cfd6aa0740e9d056c4c4c76e9b20fbd5f2c3212b909f619aafc0d8a818a6ebc6082fa26cf6e0f7ea098ef98c44861f07ef45901df68e7d0fc84d07bf",
+    "id": 1759998129654,
+    "username": "Gilles",
+    "salt": "d07221cd1041be0e3863da58ebb8a964",
+    "hash": "17496fdcab4f18c8e969b14eaac69ead705ca8602803b3e894dbcbf4ceefd1acd9aaca59c9d3a5de279296d1857ed22f66216d324ee77c6c4e294670fc4ed4f5",
     "prefs": {}
   }
 ]
